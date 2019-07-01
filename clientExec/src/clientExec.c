@@ -51,7 +51,7 @@ int main (int argc, char *argv[]) {
         int length = argc-2;           		//toglie nome programma e userCode chiave rimane per dopo         
         char *args[length+1];     			//per il nome del programma/servizio          
         int j = 3;
-        for(int i=1; i<length; i++) {       //ciclo for per --
+        for(int i=1; i<length; i++) {       //ciclo for per ---
             args[i] = argv[j];
             j++;
         }
