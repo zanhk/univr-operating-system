@@ -9,26 +9,27 @@ struct Node *head = NULL;
 //Generazione della chiave, l'utlima cifra identifica il servizio
 long generateKey(int service, char *user_code) {
     //Generazione dell'hash
-    int hash = 0;
-    int randnum;
+    int hash = 0;   //contiene i numeri generati randomicamente che verrano poi aggoingi alla chiave (long key)
+    int randnum;    //
     srand(time(NULL));
-    randnum = rand() % 100 + 1;
-    for(int i = 0; user_code[i] != '\0'; i++){
-        hash += (int)user_code[i];
+    randnum = rand() % 100 + 1; //genero un num rand da 1 a 100
+    for(int i = 0; user_code[i] != '\0'; i++){  //for che server per generare un numero random a partire
+        hash += (int)user_code[i];              //da l'user code inserito convertito in un intero
     }
-    hash *= randnum;
-    long key = hash *10 + service;	//service è l'offset aggiunto per identificare il servizio
+    hash *= randnum;    //hash che vine moltiplicata per il numero rando mgenerato
+    long key = hash *10 + service;	//memorizza nel long key l'hash per 10 per aggiungere all'ultima cifra il numero del service
+    //service è l'offset aggiunto per identificare il servizio
     
     while(containsKey(key) == 1) {			//se la chiave è già presente ne genero un'altra
         printf("The generation of key has created a replica: %li.\n", key);
         randnum = rand() % 100 + 1;
-        for(int i = 0; user_code[i] != '\0'; i++){
-            hash += (int)user_code[i];
+        for(int i = 0; user_code[i] != '\0'; i++){  //
+            hash += (int)user_code[i];              
         }
         hash *= randnum;
         key = hash *10 + service;
     }
-    addNode(key);
+    addNode(key); //funzione che server per memorizzare la chiave in un nodo di una lista 
     return key;
 }
 
